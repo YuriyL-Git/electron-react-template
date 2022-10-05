@@ -5,7 +5,5 @@ declare global {
     nodeApi: NodeApi;
   }
 }
-
-const { nodeApi } = window;
-
-export default nodeApi;
+console.log(window);
+export const { nodeApi } = window;

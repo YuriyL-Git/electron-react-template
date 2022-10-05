@@ -1,7 +1,7 @@
 import { contextBridge, ipcRenderer, IpcRendererEvent } from 'electron';
 import { nodeApi } from './api/nodeApi';
 
-contextBridge.exposeInMainWorld('api', nodeApi);
+contextBridge.exposeInMainWorld('nodeApi', nodeApi);
 
 export type Channels = 'ipc-example';
 
