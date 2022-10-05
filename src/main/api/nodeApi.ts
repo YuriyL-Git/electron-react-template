@@ -1,9 +1,9 @@
 import firstApi from './first-api';
 import secondApi from './second-api';
 
-const PreloadApi = {
+export const nodeApi = {
   firstApi,
   secondApi,
 };
 
-export default PreloadApi;
+export type NodeApi = typeof nodeApi;

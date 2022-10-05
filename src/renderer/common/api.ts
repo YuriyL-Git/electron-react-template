@@ -1,11 +1,11 @@
-import PreloadApi from '../../main/api/preloadApi';
+import { NodeApi } from '../../main/api/nodeApi';
 
 declare global {
   interface Window {
-    api: typeof PreloadApi;
+    nodeApi: NodeApi;
   }
 }
 
-const { api } = window;
+const { nodeApi } = window;
 
-export default api;
+export default nodeApi;
