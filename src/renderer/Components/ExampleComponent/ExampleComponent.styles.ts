@@ -1,4 +1,4 @@
-import { createStyles } from '../../common/create-styles';
+import { createStyles } from '../../common/helpers/create-styles';
 
 export const styles = createStyles({
   buttonOne: {
@@ -6,5 +6,10 @@ export const styles = createStyles({
   },
   buttonTwo: {
     color: 'yellow',
+  },
+  buttonThree: {
+    color: 'blue',
+    background: 'green',
+    marginLeft: '20px',
   },
 });
