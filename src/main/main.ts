@@ -28,6 +28,9 @@ let mainWindow: BrowserWindow | null = null;
 ipcMain.on('ipc-example', async (event, arg) => {
   const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`;
   console.log(msgTemplate(arg));
+  if (mainWindow) {
+    mainWindow.minimize();
+  }
   event.reply('ipc-example', msgTemplate('pong'));
 });
 
@@ -73,6 +76,8 @@ const createWindow = async () => {
     show: false,
     width: 1024,
     height: 728,
+    transparent: true,
+    frame: true,
     icon: getAssetPath('icon.png'),
     webPreferences: {
       nodeIntegration: true,
@@ -91,6 +96,7 @@ const createWindow = async () => {
     if (process.env.START_MINIMIZED) {
       mainWindow.minimize();
     } else {
+      mainWindow.maximize();
       mainWindow.show();
     }
   });

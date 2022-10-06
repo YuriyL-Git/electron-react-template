@@ -8,7 +8,6 @@ import { AppRoutes } from '../../common/routes';
 export const ExampleComponent = () => {
   const [result, setResult] = useState('');
   const navigate = useNavigate();
-  const [delay, setDelay] = useState('1000');
 
   const handleClick = async () => {
     setResult('Generation started ....');
@@ -19,6 +18,10 @@ export const ExampleComponent = () => {
     nodeApi.secondApi.executeSecond();
   };
 
+  const handleMinimize = () => {
+    window.electron.ipcRenderer.sendMessage('ipc-example', ['minimize']);
+  };
+
   return (
     <div>
       <Button
@@ -27,6 +30,9 @@ export const ExampleComponent = () => {
         sx={{ ...styles.buttonOne, ...styles.buttonTwo }}
       >
         Click
+      </Button>
+      <Button onClick={handleMinimize} type="button">
+        MinimizeWindow
       </Button>
       <div
         style={{
