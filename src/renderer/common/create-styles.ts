@@ -1,4 +1,4 @@
-import { SxProps } from '@mui/system';
+import { SxProps } from '@mui/material';
 
 export function createStyles<T extends { [name: string]: SxProps }>(
   stylesObject: T
