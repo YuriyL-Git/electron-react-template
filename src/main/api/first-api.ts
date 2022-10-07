@@ -1,5 +1,4 @@
 import { exec } from 'child_process';
-import { ipcMain } from 'electron';
 
 const firstApi = {
   async execute() {

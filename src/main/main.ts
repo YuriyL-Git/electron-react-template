@@ -29,7 +29,7 @@ ipcMain.on('ipc-example', async (event, arg) => {
   const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`;
   console.log(msgTemplate(arg));
   if (mainWindow) {
-    mainWindow.minimize();
+    mainWindow.maximize();
   }
   event.reply('ipc-example', msgTemplate('pong'));
 });
@@ -49,7 +49,7 @@ if (isDebug) {
 const installExtensions = async () => {
   const installer = require('electron-devtools-installer');
   const forceDownload = !!process.env.UPGRADE_EXTENSIONS;
-  const extensions = ['REACT_DEVELOPER_TOOLS'];
+  const extensions = ['REACT_DEVELOPER_TOOLS', 'REDUX_DEVTOOLS'];
 
   return installer
     .default(
@@ -74,10 +74,8 @@ const createWindow = async () => {
 
   mainWindow = new BrowserWindow({
     show: false,
-    width: 1024,
-    height: 728,
     transparent: true,
-    frame: true,
+    frame: true, // set false to remove top panel
     icon: getAssetPath('icon.png'),
     webPreferences: {
       nodeIntegration: true,
@@ -107,6 +105,9 @@ const createWindow = async () => {
 
   const menuBuilder = new MenuBuilder(mainWindow);
   menuBuilder.buildMenu();
+
+  // skip next line to show menu!
+  mainWindow.setMenu(null);
 
   // Open urls in the user's browser
   mainWindow.webContents.setWindowOpenHandler((edata) => {

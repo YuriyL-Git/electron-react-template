@@ -18,8 +18,13 @@ export const ExampleComponent = () => {
     nodeApi.secondApi.executeSecond();
   };
 
-  const handleMinimize = () => {
-    window.electron.ipcRenderer.sendMessage('ipc-example', ['minimize']);
+  const handleMaximize = () => {
+    window.electron.ipcRenderer.sendMessage('ipc-example', ['maximize']);
+  };
+
+  const getSettings = () => {
+    nodeApi.settings.set('test3Value', [1, 2, 3, 4]);
+    console.log(nodeApi.settings.get('test3Value'));
   };
 
   return (
@@ -31,8 +36,11 @@ export const ExampleComponent = () => {
       >
         Click
       </Button>
-      <Button onClick={handleMinimize} type="button">
-        MinimizeWindow
+      <Button onClick={handleMaximize} type="button">
+        MaximizeWindow
+      </Button>
+      <Button onClick={getSettings} type="button">
+        get settings
       </Button>
       <div
         style={{
