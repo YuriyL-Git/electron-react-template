@@ -14,16 +14,18 @@ export const ExampleComponent = () => {
     const commandResult = await nodeApi.firstApi.execute();
     setResult(commandResult as string);
     console.log('RESULT =', commandResult);
-    navigate(AppRoutes.Route1);
+    navigate(AppRoutes.SettingsRoute);
     nodeApi.secondApi.executeSecond();
   };
 
   const handleMaximize = () => {
+    navigate(AppRoutes.SettingsRoute);
     window.electron.ipcRenderer.sendMessage('ipc-example', ['maximize']);
   };
 
   const getSettings = () => {
     nodeApi.settings.set('testKeys', 11);
+    navigate('/');
     console.log(
       nodeApi.settings.addToList('test3Value', {
         testKey: 1123,

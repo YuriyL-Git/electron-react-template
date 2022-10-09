@@ -1623,6 +1623,13 @@
   resolved "https://registry.yarnpkg.com/@mui/core-downloads-tracker/-/core-downloads-tracker-5.10.8.tgz#b00402dd0796e7e99a09cfc23cb0b0a6196c8e09"
   integrity sha512-V5D7OInO4P9PdT/JACg7fwjbOORm3GklaMVgdGomjyxiyetgRND5CC9r35e1LK/DqHdoyDuhbFzdfrqWtpmEIw==
 
+"@mui/icons-material@^5.10.6":
+  version "5.10.6"
+  resolved "https://registry.yarnpkg.com/@mui/icons-material/-/icons-material-5.10.6.tgz#a032395cfe7fe8e9a8edde2d27b9e3bd23e5b935"
+  integrity sha512-QwxdRmLA46S94B0hExPDx0td+A2unF+33bQ6Cs+lNpJKVsm1YeHwNdYXYcnpWeHeQQ07055OXl7IB2GKDd0MfA==
+  dependencies:
+    "@babel/runtime" "^7.19.0"
+
 "@mui/material@^5.10.8":
   version "5.10.8"
   resolved "https://registry.yarnpkg.com/@mui/material/-/material-5.10.8.tgz#a223ec5f1128515107381e875f8d6257a00c3cd3"
@@ -9172,13 +9179,6 @@ safe-buffer@5.2.1:
   resolved "https://registry.npmjs.org/safer-buffer/-/safer-buffer-2.1.2.tgz"
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
 
-saga@^4.0.0-alpha:
-  version "4.0.0-alpha"
-  resolved "https://registry.yarnpkg.com/saga/-/saga-4.0.0-alpha.tgz#b2651416a0df5beb22215b7c02b6926772455f3c"
-  integrity sha512-zlCIMLPaurw1bBBmGkKTyDR8j1f2pkYZGP1+pn46nZT+QiMD77gpaYjOtA8eIE4urPdOacmtT9pcEKJ/woIV6Q==
-  dependencies:
-    tslib "^1.9.3"
-
 sanitize-filename@^1.6.3:
   version "1.6.3"
   resolved "https://registry.npmjs.org/sanitize-filename/-/sanitize-filename-1.6.3.tgz"
@@ -10063,7 +10063,7 @@ tsconfig-paths@^3.14.1:
     minimist "^1.2.6"
     strip-bom "^3.0.0"
 
-tslib@^1.8.1, tslib@^1.9.3:
+tslib@^1.8.1:
   version "1.14.1"
   resolved "https://registry.npmjs.org/tslib/-/tslib-1.14.1.tgz"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
