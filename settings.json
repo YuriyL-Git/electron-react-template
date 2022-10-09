@@ -1,10 +1,21 @@
 {
-    "testKeys": "tesd",
+    "testKeys": 11,
     "testKeySecond": "testValues2",
     "test3Value": [
-        1,
-        2,
-        3,
-        4
-    ]
+        {
+            "testKey": 4
+        },
+        {
+            "testKey": 7
+        },
+        {
+            "testKey": 9
+        },
+        {
+            "testKey": 1123
+        }
+    ],
+    "test4Key": {
+        "key": "val"
+    }
 }

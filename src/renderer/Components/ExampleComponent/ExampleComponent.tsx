@@ -23,8 +23,12 @@ export const ExampleComponent = () => {
   };
 
   const getSettings = () => {
-    nodeApi.settings.set('test3Value', [1, 2, 3, 4]);
-    console.log(nodeApi.settings.get('test3Value'));
+    nodeApi.settings.set('testKeys', 11);
+    console.log(
+      nodeApi.settings.addToList('test3Value', {
+        testKey: 1123,
+      })
+    );
   };
 
   return (
