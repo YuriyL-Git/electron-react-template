@@ -20,7 +20,7 @@ export const ExampleComponent = () => {
 
   const handleMaximize = () => {
     navigate(AppRoutes.SettingsRoute);
-    window.electron.ipcRenderer.sendMessage('ipc-example', ['maximize']);
+    window.electron.ipcRenderer.sendMessage('reload', ['maximize']);
   };
 
   const getSettings = () => {
