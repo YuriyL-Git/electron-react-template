@@ -7,7 +7,7 @@ export const styles = createStyles({
   mainWrapper: {
     display: 'flex',
     justifyContent: 'space-between',
-    height: 'calc(100vh - 60px)',
+    height: 'calc(100vh - 102px)',
   },
   panel: {
     width: '250px',

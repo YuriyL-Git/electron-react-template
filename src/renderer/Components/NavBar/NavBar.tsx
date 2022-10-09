@@ -18,9 +18,12 @@ export const NavBar: FC<Props> = ({ routesList }) => {
           to={route.route}
           style={{
             textDecoration: 'none',
+            display: 'flex',
+            alignItems: 'center',
           }}
           key={route.route}
         >
+          {route.icon}
           <Tab label={route.routeName} onChange={() => setTabIndex(index)} />
         </Link>
       ))}
