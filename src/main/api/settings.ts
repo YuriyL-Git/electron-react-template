@@ -41,7 +41,7 @@ function findIndex<T>(array: Array<T>, value: T): number {
 }
 
 export const settings = {
-  get(key: keyof SettingsType) {
+  get<T extends keyof SettingsType>(key: T): typeof settingsFile[T] {
     return settingsFile[key];
   },
 

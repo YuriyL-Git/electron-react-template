@@ -1,21 +1,11 @@
 {
-    "testKeys": 11,
-    "testKeySecond": "testValues2",
-    "test3Value": [
-        {
-            "testKey": 4
-        },
-        {
-            "testKey": 7
-        },
-        {
-            "testKey": 9
-        },
-        {
-            "testKey": 1123
-        }
+    "foldersList": [
+        "D:\\Soft\\The KMPlayer v4.1.5.8 Final Ml_Rus\\The KMPlayer 4.1.5.8 PortableAppZ CUTA",
+        "C:\\Python310\\tcl",
+        "C:\\Python310\\tcl\\reg1.3",
+        "C:\\Python310\\Tools",
+        "D:\\Temp\\cli\\__mocks__\\@vercel"
     ],
-    "test4Key": {
-        "key": "val"
-    }
+    "selectedFolderIndex": 0,
+    "selectedPath": "D:\\Soft\\The KMPlayer v4.1.5.8 Final Ml_Rus\\The KMPlayer 4.1.5.8 PortableAppZ CUTA"
 }

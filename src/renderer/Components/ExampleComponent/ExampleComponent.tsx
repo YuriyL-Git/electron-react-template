@@ -15,7 +15,6 @@ export const ExampleComponent = () => {
     setResult(commandResult as string);
     console.log('RESULT =', commandResult);
     navigate(AppRoutes.SettingsRoute);
-    nodeApi.secondApi.executeSecond();
   };
 
   const handleMaximize = () => {
@@ -24,13 +23,7 @@ export const ExampleComponent = () => {
   };
 
   const getSettings = () => {
-    nodeApi.settings.set('testKeys', 11);
     navigate('/');
-    console.log(
-      nodeApi.settings.addToList('test3Value', {
-        testKey: 1123,
-      })
-    );
   };
 
   return (

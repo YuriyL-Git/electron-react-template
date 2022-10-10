@@ -1,3 +1,5 @@
 add console support
 setup settings choose current file
 setup develop page to support pages and component generation
+add folder structure support
+add status bar (with selected path) to layout

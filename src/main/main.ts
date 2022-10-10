@@ -15,6 +15,7 @@ import log from 'electron-log';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
 import { setupWindow } from './window';
+import { setupIpc } from './setup-ipc';
 
 class AppUpdater {
   constructor() {
@@ -139,3 +140,5 @@ app
     });
   })
   .catch(console.log);
+
+setupIpc();

@@ -3,7 +3,7 @@ import { nodeApi } from './api/nodeApi';
 
 contextBridge.exposeInMainWorld('nodeApi', nodeApi);
 
-export type Channels = 'reload';
+export type Channels = 'reload' | 'file-request';
 
 contextBridge.exposeInMainWorld('electron', {
   ipcRenderer: {
