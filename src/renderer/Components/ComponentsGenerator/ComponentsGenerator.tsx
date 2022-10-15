@@ -6,7 +6,7 @@ import { nodeApi } from '../../common/types/node/node-api-declaration';
 export const ComponentsGenerator: FC = () => {
   const [componentName, setComponentName] = useState('');
   const hangleGenerateTemplate = () => {
-    nodeApi.generate.component();
+    nodeApi.generate.component('ButtonComponent', false);
   };
 
   return (

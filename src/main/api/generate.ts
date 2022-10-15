@@ -1,7 +1,7 @@
 import { getComponentTemplate } from '../utils/component-templates';
 
 export const generate = {
-  component() {
-    console.log(getComponentTemplate('Template', true));
+  component(name: string, withInterface: boolean) {
+    console.log(getComponentTemplate(name, withInterface));
   },
 };

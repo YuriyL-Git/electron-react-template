@@ -126,7 +126,8 @@
     "react-router-dom": "^6.3.0",
     "redux": "^4.2.0",
     "redux-saga": "^1.2.1",
-    "styled-components": "^5.3.6"
+    "styled-components": "^5.3.6",
+    "telnet-client": "^2.0.4"
   },
   "devDependencies": {
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7",

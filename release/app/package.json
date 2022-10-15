@@ -14,5 +14,8 @@
     "postinstall": "npm run electron-rebuild && npm run link-modules",
     "link-modules": "node -r ts-node/register ../../.erb/scripts/link-modules.ts"
   },
-  "dependencies": {}
+  "dependencies": {
+    "telnet-client": "^2.0.4",
+    "websocket": "^1.0.34"
+  }
 }
