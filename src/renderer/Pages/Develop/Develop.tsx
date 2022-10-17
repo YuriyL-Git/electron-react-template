@@ -3,11 +3,15 @@ import { Box, Button } from '@mui/material';
 import { RestartAlt } from '@mui/icons-material';
 import { ComponentsGenerator } from '../../Components/ComponentsGenerator/ComponentsGenerator';
 import { nodeApi } from '../../common/types/node/node-api-declaration';
+import { getIdeData } from '../../common/helpers/get-ide-data';
+import { updateIdeText } from '../../common/helpers/update-ide-text';
 
 export const Develop: FC = () => {
   const handleTestClick = async () => {
-    const result = await nodeApi.server.sendMessage('editor');
-    console.log('result', result);
+    const ideData = await getIdeData();
+    const updatedText = ideData.editorCode.replaceAll('import', 'export');
+
+    await updateIdeText(updatedText);
   };
 
   return (

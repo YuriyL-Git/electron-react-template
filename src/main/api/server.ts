@@ -31,6 +31,13 @@ export const server = {
     if (!connection) {
       connection = await getConnection();
     }
+
+    try {
+      await connection.send('test message');
+    } catch {
+      connection = await getConnection();
+    }
+
     return connection.send(message);
   },
 };
