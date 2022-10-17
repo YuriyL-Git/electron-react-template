@@ -19,6 +19,7 @@ export const routesList: Array<RouterProps> = [
     routeName: 'Home',
     component: <Page1 />,
     icon: <Icecream />,
+    withSideBar: true,
   },
   {
     route: AppRoutes.SettingsRoute,

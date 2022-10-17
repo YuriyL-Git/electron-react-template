@@ -5,4 +5,5 @@ export interface RouterProps {
   routeName: string;
   component: ReactNode;
   icon?: ReactNode;
+  withSideBar?: boolean;
 }

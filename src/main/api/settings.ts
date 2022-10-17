@@ -4,6 +4,8 @@ import settingsFile from '../../../settings.json';
 
 type SettingsType = typeof settingsFile;
 
+console.log(settingsFile);
+
 let isFileBusy = false;
 
 async function saveSettingsFile(file: SettingsType) {
@@ -18,16 +20,13 @@ async function saveSettingsFile(file: SettingsType) {
   }
 
   isFileBusy = true;
-  fs.writeFile(
-    `${process.env.PWD}/settings.json`,
-    JSON.stringify(file, null, 4),
-    (err) => {
-      if (err) {
-        console.log(err);
-      }
-      isFileBusy = false;
+  console.log('Path to write:', `settings.json`);
+  fs.writeFile(`settings.json`, JSON.stringify(file, null, 4), (err) => {
+    if (err) {
+      console.log(err);
     }
-  );
+    isFileBusy = false;
+  });
 }
 
 function findIndex<T>(array: Array<T>, value: T): number {

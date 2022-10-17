@@ -9,8 +9,8 @@ import { updateIdeText } from '../../common/helpers/update-ide-text';
 export const Develop: FC = () => {
   const handleTestClick = async () => {
     const ideData = await getIdeData();
-    const updatedText = ideData.editorCode.replaceAll('import', 'export');
-
+    const updatedText = nodeApi.transform.addUseState(ideData);
+    console.log(updatedText);
     await updateIdeText(updatedText);
   };
 
