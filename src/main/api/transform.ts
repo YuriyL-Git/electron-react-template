@@ -1,10 +1,18 @@
 // eslint-disable-next-line import/no-cycle
-import { transformCode } from '../transform/transform-code';
+import { getSource } from '../transform/get-source';
 import { IdeData } from '../../renderer/common/types/interfaces/ide-data';
-import { addUseState } from '../transform/add-use-state';
+import { addImport } from '../transform/add-import';
 
 export const transform = {
   addUseState(ideData: IdeData) {
-    return transformCode(ideData, addUseState).getText();
+    const source = getSource(ideData);
+
+    addImport(source, {
+      moduleName: './slices/leaderBoard',
+      namedImport: 'initialLeaderBoardState',
+      defaultImport: 'leaderBoard',
+    });
+
+    return source.getText();
   },
 };
