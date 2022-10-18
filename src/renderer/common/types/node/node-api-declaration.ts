@@ -1,4 +1,4 @@
-import { NodeApi } from '../../../../main/api/nodeApi';
+import { NodeApi } from '../../../../main/api';
 
 declare global {
   interface Window {

@@ -1,5 +1,5 @@
 import { contextBridge, ipcRenderer, IpcRendererEvent } from 'electron';
-import { nodeApi } from './api/nodeApi';
+import { nodeApi } from './api';
 
 contextBridge.exposeInMainWorld('nodeApi', nodeApi);
 
