@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-cycle
-import { nodeApi } from '../types/node/node-api-declaration';
-import { IdeData } from '../types/interfaces/ide-data';
+import { nodeApi } from '../../types/node/node-api-declaration';
+import { IdeData } from '../../types/interfaces/ide-data';
 
 export async function getIdeData(): Promise<IdeData> {
   const editorCode = await nodeApi.server.sendMessage('editorText');

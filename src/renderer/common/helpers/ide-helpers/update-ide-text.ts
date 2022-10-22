@@ -1,5 +1,5 @@
-import { nodeApi } from '../types/node/node-api-declaration';
-import { IdeData } from '../types/interfaces/ide-data';
+import { nodeApi } from '../../types/node/node-api-declaration';
+import { IdeData } from '../../types/interfaces/ide-data';
 import { moveCaret } from './move-caret';
 
 export async function updateIdeText(text: string, ideData: IdeData) {

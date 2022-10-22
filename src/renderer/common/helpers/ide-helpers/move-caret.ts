@@ -1,4 +1,4 @@
-import { nodeApi } from '../types/node/node-api-declaration';
+import { nodeApi } from '../../types/node/node-api-declaration';
 
 export async function moveCaret({
   line,

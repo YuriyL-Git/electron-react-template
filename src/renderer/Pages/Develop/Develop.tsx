@@ -2,16 +2,16 @@ import React, { FC } from 'react';
 import { Box, Button } from '@mui/material';
 import { RestartAlt } from '@mui/icons-material';
 import { ComponentsGenerator } from '../../Components/ComponentsGenerator/ComponentsGenerator';
-import { openFileInEditor } from '../../common/helpers/open-file-in-editor';
+import { openFileInEditor } from '../../common/helpers/ide-helpers/open-file-in-editor';
+import { getIdeData } from '../../common/helpers/ide-helpers/get-ide-data';
+import { nodeApi } from '../../common/types/node/node-api-declaration';
 
 export const Develop: FC = () => {
   const handleTestClick = async () => {
-    const fileresult = await openFileInEditor({
-      file: 'D:\\Projects\\sv-hero-dashboard\\src\\App.style.ts',
-      line: 3,
-      column: 12,
-    });
-    console.log('fileresult=', fileresult);
+    const ideData = await getIdeData();
+    const openFileData = await nodeApi.tsmorph.getClassDeclarationData(ideData);
+    console.log('openFileData', openFileData);
+    await openFileInEditor(openFileData);
   };
 
   return (
