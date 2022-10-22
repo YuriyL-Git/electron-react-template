@@ -38,6 +38,10 @@ export const server = {
       connection = await getConnection();
     }
 
-    return connection.send(message);
+    const result = await connection.send(message);
+    if (result === 'Wrong command') {
+      console.error('Wrong command: ', message);
+    }
+    return result;
   },
 };

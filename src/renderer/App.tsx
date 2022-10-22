@@ -1,6 +1,11 @@
-import { MemoryRouter as BrowserRouter, Routes, Route } from 'react-router-dom';
+import {
+  MemoryRouter as BrowserRouter,
+  Routes,
+  Route,
+  useNavigate,
+} from 'react-router-dom';
 import './App.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   DeveloperMode,
   Icecream,
@@ -15,6 +20,12 @@ import { Develop } from './Pages/Develop/Develop';
 
 export const routesList: Array<RouterProps> = [
   {
+    route: AppRoutes.DevelopRoute,
+    routeName: 'Develop',
+    component: <Develop />,
+    icon: <DeveloperMode />,
+  },
+  {
     route: AppRoutes.Home,
     routeName: 'Home',
     component: <Page1 />,
@@ -26,12 +37,6 @@ export const routesList: Array<RouterProps> = [
     routeName: 'Settings',
     component: <Settings />,
     icon: <SettingsApplications />,
-  },
-  {
-    route: AppRoutes.DevelopRoute,
-    routeName: 'Develop',
-    component: <Develop />,
-    icon: <DeveloperMode />,
   },
 ];
 

@@ -1,6 +1,6 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { Tabs, Tab } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { styles } from './NavBar.styles';
 import { RouterProps } from '../../common/types/interfaces/interfaces';
 
@@ -10,6 +10,11 @@ interface Props {
 
 export const NavBar: FC<Props> = ({ routesList }) => {
   const [tabIndex, setTabIndex] = useState(0);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    navigate(routesList[0].route);
+  }, [navigate, routesList]);
 
   return (
     <Tabs sx={styles.container} value={tabIndex}>
