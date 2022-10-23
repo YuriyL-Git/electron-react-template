@@ -120,12 +120,12 @@ export const tsmorph = {
       classPropertyName: string | null
     ) => {
       if (!file || !hookName || !classPropertyName) {
-        return 0;
+        return null;
       }
 
-      let result = {
-        line: 0,
-        column: 0,
+      let result: { line: number | null; column: number | null } = {
+        line: null,
+        column: null,
       };
 
       const project = new Project();
