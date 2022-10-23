@@ -72,11 +72,7 @@ export const tsmorph = {
         return null;
       }
 
-      return declaration
-        .split('=')[1]
-        .replace('()', '')
-        .replace(';', '')
-        .trim();
+      return declaration.split('=')[1].split('(')[0].trim();
     };
 
     const getImportPath = (hookName: string | null) => {
