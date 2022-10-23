@@ -104,9 +104,9 @@ export const tsmorph = {
     const getClassFilePath = (importPath: string | null) => {
       const folderPath = ideData.filePath.replace(ideData.fileName, '');
 
-      let file = importPath
+      let file: string | null = importPath
         ? path.normalize(path.join(folderPath, importPath))
-        : null;
+        : ideData.filePath; // in case if implementation is on the same file
 
       if (fs.existsSync(`${file}.ts`)) {
         file = `${file}.ts`;
