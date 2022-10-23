@@ -135,12 +135,18 @@ export const tsmorph = {
         ?.getVariableDeclarations()
         .find((decl) => decl.getName() === hookName);
 
+      hookDeclaration
+        ?.getDescendants()
+        .filter((st) => st.getKindName() === 'PropertyAssignment')
+        .forEach((st) => console.log(st.getText()));
+
       const classImplement = hookDeclaration
         ?.getDescendants()
         .find(
           (st) =>
             st.getKindName() === 'PropertyAssignment' &&
-            st.getText().includes(classPropertyName)
+            (st.getText().trim().startsWith(`${classPropertyName}:`) ||
+              st.getText().trim().startsWith(`${classPropertyName} :`))
         );
 
       console.log('pos', classImplement?.getPos());
