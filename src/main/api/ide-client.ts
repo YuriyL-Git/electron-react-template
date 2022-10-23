@@ -2,15 +2,15 @@ import { Telnet } from 'telnet-client';
 
 let connection: Telnet | null = null;
 
-async function getConnection() {
+async function getConnection(port: number) {
   return new Promise<Telnet>((resolve) => {
     const telnetConnection = new Telnet();
 
     const params = {
       host: '127.0.0.1',
-      port: 9991,
+      port,
       shellPrompt: '',
-      timeout: 2500,
+      timeout: 1500,
     };
 
     telnetConnection
@@ -22,20 +22,31 @@ async function getConnection() {
   });
 }
 
-export const server = {
+export const ideClient = {
   get(name: string) {
     console.log(name);
     return '';
   },
   async sendMessage(message: string) {
+    let isBrowser = false;
+    try {
+      if (window) {
+        isBrowser = true;
+      }
+    } catch {
+      console.log('');
+    }
+
+    const port = isBrowser ? 9991 : 9992;
+
     if (!connection) {
-      connection = await getConnection();
+      connection = await getConnection(port);
     }
 
     try {
       await connection.send('test message');
     } catch {
-      connection = await getConnection();
+      connection = await getConnection(port);
     }
 
     const result = await connection.send(message);

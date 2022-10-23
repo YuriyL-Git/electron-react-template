@@ -1,14 +1,14 @@
 import firstApi from './first-api';
 import { settings } from './settings';
 import { generate } from './generate';
-import { server } from './server';
+import { ideClient } from './ide-client';
 import { tsmorph } from './tsmorph';
 
 export const nodeApi = {
   firstApi,
   settings,
   generate,
-  server,
+  ideClient,
   tsmorph,
 };
 

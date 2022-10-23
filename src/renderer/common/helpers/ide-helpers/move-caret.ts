@@ -1,11 +1,14 @@
-import { nodeApi } from '../../types/node/node-api-declaration';
+import { NodeApi } from '../../../../main/api';
 
-export async function moveCaret({
-  line,
-  column,
-}: {
-  line: number;
-  column: number;
-}) {
-  return nodeApi.server.sendMessage(`moveCaret::${line} ${column}`);
+export async function moveCaret(
+  nodeApi: NodeApi,
+  {
+    line,
+    column,
+  }: {
+    line: number;
+    column: number;
+  }
+) {
+  return nodeApi.ideClient.sendMessage(`moveCaret::${line} ${column}`);
 }

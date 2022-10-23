@@ -1,16 +1,19 @@
 // eslint-disable-next-line import/no-cycle
-import { nodeApi } from '../../types/node/node-api-declaration';
+import { NodeApi } from '../../../../main/api';
 import { IdeData } from '../../types/interfaces/ide-data';
 
-export async function getIdeData(): Promise<IdeData> {
-  const editorCode = await nodeApi.server.sendMessage('editorText');
-  const caretLine = Number(await nodeApi.server.sendMessage('caretLine'));
-  const caretColumn = Number(await nodeApi.server.sendMessage('caretColumn'));
-  const filePath = (await nodeApi.server.sendMessage('filePath')).replace(
+export async function getIdeData(nodeApi: NodeApi): Promise<IdeData> {
+  console.log('nodeApi =', nodeApi);
+  const editorCode = await nodeApi.ideClient.sendMessage('editorText');
+  const caretLine = Number(await nodeApi.ideClient.sendMessage('caretLine'));
+  const caretColumn = Number(
+    await nodeApi.ideClient.sendMessage('caretColumn')
+  );
+  const filePath = (await nodeApi.ideClient.sendMessage('filePath')).replace(
     '\r\n',
     ''
   );
-  const fileName = (await nodeApi.server.sendMessage('fileName')).replace(
+  const fileName = (await nodeApi.ideClient.sendMessage('fileName')).replace(
     '\r\n',
     ''
   );

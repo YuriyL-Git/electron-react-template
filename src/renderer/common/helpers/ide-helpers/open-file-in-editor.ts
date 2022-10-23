@@ -1,5 +1,5 @@
-import { nodeApi } from '../../types/node/node-api-declaration';
 import { moveCaret } from './move-caret';
+import { NodeApi } from '../../../../main/api';
 
 interface OpenFileProps {
   file: string | null;
@@ -7,13 +7,16 @@ interface OpenFileProps {
   column: number;
 }
 
-export async function openFileInEditor({ file, column, line }: OpenFileProps) {
+export async function openFileInEditor(
+  nodeApi: NodeApi,
+  { file, column, line }: OpenFileProps
+) {
   if (!file) {
     return;
   }
 
-  await nodeApi.server.sendMessage(`openFile::${file}`);
-  await moveCaret({
+  await nodeApi.ideClient.sendMessage(`openFile::${file}`);
+  await moveCaret(nodeApi, {
     line,
     column,
   });

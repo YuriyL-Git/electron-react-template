@@ -5,4 +5,5 @@ declare global {
     nodeApi: NodeApi;
   }
 }
+
 export const { nodeApi } = window;
