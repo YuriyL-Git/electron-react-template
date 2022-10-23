@@ -9,7 +9,9 @@ import { nodeApi } from '../../common/types/node/node-api-declaration';
 export const Develop: FC = () => {
   const handleTestClick = async () => {
     const ideData = await getIdeData();
-    const openFileData = await nodeApi.tsmorph.getClassDeclarationData(ideData);
+    const openFileData = await nodeApi.tsmorph.getCssClassImplementation(
+      ideData
+    );
     console.log('openFileData', openFileData);
     await openFileInEditor(openFileData);
   };

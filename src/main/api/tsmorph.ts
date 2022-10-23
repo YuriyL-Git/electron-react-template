@@ -1,10 +1,11 @@
 // eslint-disable-next-line import/no-cycle
 import path from 'path';
+import fs from 'fs';
+import { Project } from 'ts-morph';
 import { getSource } from '../tsmorph-helpers/get-source';
 import { IdeData } from '../../renderer/common/types/interfaces/ide-data';
 import { addImport } from '../tsmorph-helpers/add-import';
 import { insertTextToIde } from '../tsmorph-helpers/insert-text-to-ide';
-import fs from 'fs';
 
 export const tsmorph = {
   addUseState(ideData: IdeData) {
@@ -21,7 +22,7 @@ export const tsmorph = {
     return source.getText();
   },
 
-  async getClassDeclarationData(ideData: IdeData) {
+  async getCssClassImplementation(ideData: IdeData) {
     const source = getSource(ideData);
     const caretPosition = source.compilerNode.getPositionOfLineAndCharacter(
       ideData.caretLine,
@@ -38,14 +39,23 @@ export const tsmorph = {
           isFound = true;
         }
       }
-      const result = node
+      const names = node
         ?.getText()
         .replace('{', '')
         .replace('}', '')
         .trim()
-        .split('.')[0];
+        .split('.');
 
-      return result && /^[a-z0-9]+$/i.test(result) ? result : null;
+      const className =
+        names && /^[a-z0-9]+$/i.test(names[0]) ? names[0] : null;
+
+      const classPropertyName =
+        names && /^[a-z0-9]+$/i.test(names[1]) ? names[1] : null;
+
+      return {
+        className,
+        classPropertyName,
+      };
     };
 
     const getHookName = (className: string | null) => {
@@ -91,27 +101,72 @@ export const tsmorph = {
       );
     };
 
-    const className = getClassesObjectName();
-    const hookName = getHookName(className);
+    const getClassFilePath = (importPath: string | null) => {
+      const folderPath = ideData.filePath.replace(ideData.fileName, '');
+
+      let file = importPath
+        ? path.normalize(path.join(folderPath, importPath))
+        : null;
+
+      if (fs.existsSync(`${file}.ts`)) {
+        file = `${file}.ts`;
+      } else if (fs.existsSync(`${file}.tsx`)) {
+        file = `${file}.tsx`;
+      } else if (!fs.existsSync(`${file}`)) {
+        file = null;
+      }
+      return file;
+    };
+
+    const getClassLine = (
+      file: string | null,
+      hookName: string | null,
+      classPropertyName: string | null
+    ) => {
+      if (!file || !hookName || !classPropertyName) {
+        return 0;
+      }
+
+      let result = {
+        line: 0,
+        column: 0,
+      };
+
+      const project = new Project();
+
+      const classSource = project.addSourceFileAtPath(file);
+      const hookDeclaration = classSource
+        ?.getVariableDeclarations()
+        .find((decl) => decl.getName() === hookName);
+
+      const classImplement = hookDeclaration
+        ?.getDescendants()
+        .find(
+          (st) =>
+            st.getKindName() === 'PropertyAssignment' &&
+            st.getText().includes(classPropertyName)
+        );
+
+      console.log('pos', classImplement?.getPos());
+
+      if (classImplement) {
+        result = classSource.getLineAndColumnAtPos(classImplement?.getPos());
+      }
+      console.log('result', result);
+
+      return result.line;
+    };
+
+    const classNamings = getClassesObjectName();
+    const hookName = getHookName(classNamings.className);
     const importPath = getImportPath(hookName);
-    const folderPath = ideData.filePath.replace(ideData.fileName, '');
-
-    let file = importPath
-      ? path.normalize(path.join(folderPath, importPath))
-      : null;
-
-    if (fs.existsSync(`${file}.ts`)) {
-      file = `${file}.ts`;
-    } else if (fs.existsSync(`${file}.tsx`)) {
-      file = `${file}.tsx`;
-    } else if (!fs.existsSync(`${file}`)) {
-      file = null;
-    }
+    const file = getClassFilePath(importPath);
+    const line = getClassLine(file, hookName, classNamings.classPropertyName);
 
     return {
       file,
-      column: 1,
-      line: 4,
+      column: 0,
+      line,
     };
   },
 };
