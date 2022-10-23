@@ -47,10 +47,10 @@ export const tsmorph = {
         .split('.');
 
       const className =
-        names && /^[a-z0-9]+$/i.test(names[0]) ? names[0] : null;
+        names && /^[a-z0-9-_]+$/i.test(names[0]) ? names[0] : null;
 
       const classPropertyName =
-        names && /^[a-z0-9]+$/i.test(names[1]) ? names[1] : null;
+        names && /^[a-z0-9-_]+$/i.test(names[1]) ? names[1] : null;
 
       return {
         className,
