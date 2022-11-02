@@ -12,3 +12,10 @@ app.get('/move-to-class', async (req, res) => {
 
   res.send({ message: ideData.editorCode });
 });
+
+app.get('/console-selected-variable', async (req, res) => {
+  const ideData = await getIdeData(nodeApi);
+  console.log('selected text =', ideData.selectedText);
+
+  res.send({ message: ideData.editorCode });
+});

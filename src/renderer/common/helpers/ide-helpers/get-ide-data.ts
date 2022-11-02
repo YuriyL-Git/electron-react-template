@@ -3,8 +3,11 @@ import { NodeApi } from '../../../../main/api';
 import { IdeData } from '../../types/interfaces/ide-data';
 
 export async function getIdeData(nodeApi: NodeApi): Promise<IdeData> {
-  console.log('nodeApi =', nodeApi);
   const editorCode = await nodeApi.ideClient.sendMessage('editorText');
+  const selectedText = (
+    await nodeApi.ideClient.sendMessage('selectedText')
+  ).trim();
+
   const caretLine = Number(await nodeApi.ideClient.sendMessage('caretLine'));
   const caretColumn = Number(
     await nodeApi.ideClient.sendMessage('caretColumn')
@@ -24,5 +27,6 @@ export async function getIdeData(nodeApi: NodeApi): Promise<IdeData> {
     caretColumn,
     filePath,
     fileName,
+    selectedText: selectedText !== 'Wrong command' ? selectedText : '',
   };
 }

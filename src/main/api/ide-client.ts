@@ -10,7 +10,7 @@ async function getConnection(port: number) {
       host: '127.0.0.1',
       port,
       shellPrompt: '',
-      timeout: 1500,
+      timeout: 2500,
     };
 
     telnetConnection

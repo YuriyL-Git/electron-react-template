@@ -4,4 +4,5 @@ export interface IdeData {
   fileName: string;
   caretLine: number;
   caretColumn: number;
+  selectedText: string;
 }
