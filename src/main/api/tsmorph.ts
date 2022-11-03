@@ -1,24 +1,42 @@
-// eslint-disable-next-line import/no-cycle
 import path from 'path';
 import fs from 'fs';
 import { Project } from 'ts-morph';
 import { getSource } from '../tsmorph-helpers/get-source';
 import { IdeData } from '../../renderer/common/types/interfaces/ide-data';
 import { addImport } from '../tsmorph-helpers/add-import';
-import { insertTextToIde } from '../tsmorph-helpers/insert-text-to-ide';
+import { insertTextToSource } from '../tsmorph-helpers/insert-text-to-source';
+import { getNodeThatContains } from '../tsmorph-helpers/get-node-that-contains';
 
 export const tsmorph = {
   addUseState(ideData: IdeData) {
     const source = getSource(ideData);
-
     addImport(source, {
       moduleName: './slices/leaderBoard',
       namedImport: 'initialLeaderBoardState',
       defaultImport: 'leaderBoard',
     });
 
-    insertTextToIde({ source, ideData, text: 'const [] = useState()' });
+    insertTextToSource({ source, ideData, text: 'const [] = useState()' });
+    return source.getText();
+  },
 
+  addConsoleLog(ideData: IdeData) {
+    if (!ideData.selectionEnd) {
+      return '';
+    }
+
+    const source = getSource(ideData);
+    const consoleText = `\n console.log('${ideData.selectedText}: >>', ${ideData.selectedText});`;
+    const node = getNodeThatContains({
+      pos: ideData.selectionEnd,
+      source,
+      searchText: ';',
+    });
+
+    const nodePosition = node?.getEnd();
+    if (nodePosition != null) {
+      source.insertText(nodePosition, consoleText);
+    }
     return source.getText();
   },
 
@@ -30,15 +48,12 @@ export const tsmorph = {
     );
 
     const getClassesObjectName = () => {
-      let isFound = false;
-      let node = source.getDescendantAtPos(caretPosition);
+      const node = getNodeThatContains({
+        pos: caretPosition,
+        source,
+        searchText: '{',
+      });
 
-      while (!isFound) {
-        node = node?.getFirstAncestor();
-        if (node == null || node?.getText().includes('{')) {
-          isFound = true;
-        }
-      }
       const names = node
         ?.getText()
         .replace('{', '')

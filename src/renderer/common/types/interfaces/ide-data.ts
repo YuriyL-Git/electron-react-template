@@ -5,4 +5,6 @@ export interface IdeData {
   caretLine: number;
   caretColumn: number;
   selectedText: string;
+  selectionStart: number | null;
+  selectionEnd: number | null;
 }

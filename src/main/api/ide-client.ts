@@ -10,7 +10,7 @@ async function getConnection(port: number) {
       host: '127.0.0.1',
       port,
       shellPrompt: '',
-      timeout: 2500,
+      timeout: 500,
     };
 
     telnetConnection
@@ -49,10 +49,18 @@ export const ideClient = {
       connection = await getConnection(port);
     }
 
-    const result = await connection.send(message);
+    let result;
+
+    try {
+      result = await connection.send(message);
+    } catch {
+      console.log('Error');
+    }
+
     if (result === 'Wrong command') {
       console.error('Wrong command: ', message);
     }
-    return result;
+
+    return result || '';
   },
 };

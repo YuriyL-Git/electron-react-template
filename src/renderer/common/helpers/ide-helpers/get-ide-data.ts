@@ -8,6 +8,16 @@ export async function getIdeData(nodeApi: NodeApi): Promise<IdeData> {
     await nodeApi.ideClient.sendMessage('selectedText')
   ).trim();
 
+  let selectionStart = null;
+  let selectionEnd = null;
+
+  if (selectedText !== 'null') {
+    selectionStart = Number(
+      await nodeApi.ideClient.sendMessage('selectionStart')
+    );
+    selectionEnd = Number(await nodeApi.ideClient.sendMessage('selectionEnd'));
+  }
+
   const caretLine = Number(await nodeApi.ideClient.sendMessage('caretLine'));
   const caretColumn = Number(
     await nodeApi.ideClient.sendMessage('caretColumn')
@@ -27,6 +37,11 @@ export async function getIdeData(nodeApi: NodeApi): Promise<IdeData> {
     caretColumn,
     filePath,
     fileName,
-    selectedText: selectedText !== 'Wrong command' ? selectedText : '',
+    selectionStart,
+    selectionEnd,
+    selectedText:
+      selectedText !== 'Wrong command' && selectedText !== 'null'
+        ? selectedText
+        : '',
   };
 }
